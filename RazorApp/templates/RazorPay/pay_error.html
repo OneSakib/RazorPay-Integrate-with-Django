@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+{% load  static %}
+{% block content %}
+    <div class="container">
+        <h4 class="text-center">Payment Error</h4>
+        <img src="{% static 'error.jpg' %}" style="width: 250px;" alt="error image is not load" class="d-block m-auto">
+        <button class="btn btn-success  float-end" onclick="printreceipt()">Print Receipt</button>
+        <table class="table w-50 m-auto mt-3">
+            <tbody>
+            <tr>
+                <th>Error is :</th>
+                <td>{{ obj }}</td>
+            </tr>
+            <tr>
+                <th>Code is :</th>
+                <td>{{ code }}</td>
+            </tr>
+            <tr>
+                <th>Description is :</th>
+                <td>{{ description }}</td>
+            </tr>
+            <tr>
+                <th>Source is :</th>
+                <td>{{ source }}</td>
+            </tr>
+            <tr>
+                <th>Step is :</th>
+                <td>{{ step }}</td>
+            </tr>
+            <tr>
+                <th>Reason is :</th>
+                <td>{{ reason }}</td>
+            </tr>
+            <tr>
+                <th>Order Id is :</th>
+                <td>{{ order_id }}</td>
+            </tr>
+            <tr>
+                <th>Payment Id is :</th>
+                <td>{{ payment_id }}</td>
+            </tr>
+            </tbody>
+        </table>
+        <a href="{% url 'RazorPay:index' %}" class="btn btn-danger d-block w-25 m-auto mt-5">Pay Again</a>
+    </div>
+    <script>
+        function printreceipt() {
+            $('.navbar').addClass('d-none')
+            $('footer').addClass('d-none');
+            $('button').addClass('d-none');
+            $('a').addClass('d-none')
+            window.print()
+        }
+
+        window.onafterprint = function () {
+            $('.navbar').removeClass('d-none')
+            $('footer').removeClass('d-none');
+            $('button').removeClass('d-none');
+            $('a').removeClass('d-none')
+        }
+    </script>
+{% endblock %}

@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+{% block css %}
+{% endblock %}
+{% load static %}
+{% block content %}
+    <div class="container mt-3 text-center">
+        <img src="{% static 'success_payment.png' %}" alt="Image is not load" style="width: 200px;"
+             class="d-block m-auto mb-3 ">
+        <h5>Thanks Your Payment has been received </h5>
+        <h4>Payment Details</h4>
+        <button class="btn btn-success float-end" onclick="printreceipt()">Print</button>
+        <table class="table text-start w-50 m-auto">
+            <tbody>
+            <tr>
+                <th scope="row">Payment Id</th>
+                <td>{{ obj.payment_id }}</td>
+            </tr>
+            <tr>
+                <th scope="row">Name</th>
+                <td>{{ obj.name }}</td>
+            </tr>
+            <tr>
+                <th scope="row">Email</th>
+                <td>{{ obj.email }}</td>
+            </tr>
+            <tr>
+                <th scope="row">Contact</th>
+                <td>{{ obj.contact }}</td>
+            </tr>
+            <tr>
+                <th scope="row">Address</th>
+                <td>{{ obj.address }}</td>
+            </tr>
+            <tr>
+                <th scope="row">Amount(Rs.)</th>
+                <td>{{ obj.amount }}</td>
+            </tr>
+            </tbody>
+        </table>
+        <a href="{% url 'RazorPay:index' %}" class="text-decoration-none fs-3 btn btn-outline-success mt-2">Go to Home</a>
+    </div>
+{% endblock %}
+{% block js %}
+    <script>
+        function printreceipt() {
+            $('.navbar').addClass('d-none')
+            $('footer').addClass('d-none');
+            $('button').addClass('d-none');
+            $('a').addClass('d-none')
+            window.print()
+        }
+
+        window.onafterprint = function () {
+            $('.navbar').removeClass('d-none')
+            $('footer').removeClass('d-none');
+            $('button').removeClass('d-none');
+            $('a').removeClass('d-none')
+        }
+    </script>
+{% endblock %}

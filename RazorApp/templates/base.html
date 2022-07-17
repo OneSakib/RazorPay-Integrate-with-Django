@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <!--load static files-->
+    {% load static %}
+    <!--Google search console meta -->
+    <meta name="google-site-verification" content="O637b8VrKweSEsTgXfEogQQIqpF67zo6eWEC5MhFaA0"/>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="title" content="{% if object.title %} {{ object.title }} {% else %}Welcome to w3code{% endif %}">
+    <meta name="Keywords"
+          content="HTML, Python, CSS, SQL, JavaScript, How to, PHP, Java, C, C++, C#, jQuery, Bootstrap, Colors, XML, MySQL, Icons, NodeJS, React, Graphics, Angular, R, AI, Git, Data Science, Code Game, Tutorials, Programming, Web Development, Training, Learning, Quiz, Exercises, Courses, Lessons, References, Examples, Learn to code, Source code, Demos, Tips, Website">
+    <meta name="Description"
+          content="Well organized and easy to understand Web building tutorials with lots of examples of how to use HTML, CSS, JavaScript, SQL, Python, PHP, Bootstrap, Java, XML and more.">
+    <meta name="robots" content="index, follow">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="language" content="English">
+    <meta name="revisit-after" content="days">
+    <meta name="author" content="Sakib Malik">
+    <!--Og properties-->
+
+    <meta property="og:title"
+          content="{% if object.title %} {{ object.title }} {% else %}Welcome to w3code{% endif %}"/>
+    <meta property="og:image" content="{{ host_name }}/static/logo.ico">
+    <meta property="og:image:type" content="image/ico">
+    <meta property="og:image:width" content="50">
+    <meta property="og:image:height" content="50">
+    <meta property="og:description"
+          content="W3Code offers free online tutorials, references and exercises in all the major languages of the web. Covering popular subjects like HTML, CSS, JavaScript, Python, SQL, Java, and many, many more.">
+    <meta property="og:locale" content="en_US"/>
+    <meta property="og:type" content="website"/>
+    <meta name="theme-color" content="#4CAF50"/>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <!--Twitter Meta -->
+    <meta name="twitter:description" property="og:description"
+          content="Well organized and easy to understand Web building tutorials with lots of examples of how to use HTML, CSS, JavaScript, SQL, Python, PHP, Bootstrap, Java, XML and more."/>
+    <meta name="twitter:title" property="og:title"
+          content="{% if object.title %} {{ object.title }} {% else %}Welcome to w3code{% endif %}"/>
+    <meta property="og:url" content="{{ host_name }}"/>
+    <meta property="og:site_name" content="w3code.tech"/>
+    <meta name="twitter:card" content="summary"/>
+    <meta name="twitter:site" content="@pagew3code.tech"/>
+    <meta name="twitter:domain" content="w3code.tech"/>
+    <meta name="twitter:creator" content="@pagew3code.tech"/>
+    <title>{% block title %}Welcome to Razor Pay Integration{% endblock %}</title>
+    <!-- Bootstrap CSS -->
+    <link href="{% static 'Bootstrap/css/bootstrap.min.css' %}" rel="stylesheet" crossorigin="anonymous">
+    <!--Icon for the title bar-->
+    <link rel="icon" href="{% static 'logo.ico' %}" type="image/x-icon">
+
+    <!--Font awesome kit cdn-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+          integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
+          crossorigin="anonymous" referrerpolicy="no-referrer"/>
+    <!--CSS BLock-->
+    {% block css %}
+    {% endblock %}
+    <style>
+        @font-face {
+            font-family: sofia-pro;
+            src: local('sofia-pro'), url("{% static 'Fonts/sofiapro-light.otf' %}") format("truetype");
+        }
+
+        #btn-back-to-top {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+<!--Body content Block-->
+{% include 'commonnavbar.html' %}
+<div class="container-fluid">
+    {% if messages %}
+        {% for message in messages %}
+            <div class="alert alert-{{ message.tags }} mt-1 mb-1" role="alert" id="alert-message">
+                <button type="button" class="btn-close float-end" data-bs-dismiss="alert"
+                        aria-label="Close"></button>
+                <strong>Message:</strong>{{ message }}
+            </div>
+        {% endfor %}
+    {% endif %}
+</div>
+{% block content %}
+{% endblock %}
+<!-- Back to top button -->
+<button type="button" class="btn btn-primary btn-floating btn-lg" id="btn-back-to-top">
+    <i class="fas fa-arrow-up"></i>
+</button>
+
+<!--Footer-->
+{% include 'footer.html' %}
+</body>
+<!-- Option 1: Bootstrap Bundle with Popper -->
+<script src="{% static 'Bootstrap/js/bootstrap.bundle.min.js' %}" crossorigin="anonymous"></script>
+<script src="{% static 'Bootstrap/jquery/jquery-3.6.0.js' %}"></script>
+{% block js %}
+{% endblock %}
+<script>
+    //Get the button
+    let mybutton = document.getElementById("btn-back-to-top");
+
+    // When the user scrolls down 20px from the top of the document, show the button
+    window.onscroll = function () {
+        scrollFunction();
+    };
+
+    function scrollFunction() {
+        if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
+            mybutton.style.display = "block";
+        } else {
+            mybutton.style.display = "none";
+        }
+    }
+
+    // When the user clicks on the button, scroll to the top of the document
+    mybutton.addEventListener("click", backToTop);
+
+    function backToTop() {
+        document.body.scrollTop = 0;
+        document.documentElement.scrollTop = 0;
+    }
+</script>
+</html>
+
