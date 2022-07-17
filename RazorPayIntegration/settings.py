@@ -119,5 +119,5 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Razor pay
 
-RAZORPAY_CLIENT_ID = "<Your Clent id>"
-RAZORPAY_SECRET_ID = "<Your Secret ID>"
+RAZORPAY_CLIENT_ID = "rzp_test_XB0DStFIyKrvv6"
+RAZORPAY_SECRET_ID = "q7i7bsYmBEi0x6U49EKGtIRO"
