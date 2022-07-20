@@ -51,8 +51,18 @@ class SuccessView(View):
             obj = Coffee.objects.get(order_id__exact=razorpay_order_id)
             obj.payment_id = razorpay_payment_id
             obj.signature_id = razorpay_signature
-            obj.paid = True
-            obj.save()
+            client = razorpay.Client(auth=(settings.RAZORPAY_CLIENT_ID, settings.RAZORPAY_SECRET_ID))
+            params_dict = {
+                'razorpay_order_id': razorpay_order_id,
+                'razorpay_payment_id': razorpay_payment_id,
+                'razorpay_signature': razorpay_signature
+            }
+            check = client.utility.verify_payment_signature(params_dict)
+            if check:
+                obj.paid = True
+                obj.save()
+            else:
+                raise ValueError
             context = {
                 'obj': obj
             }
@@ -65,7 +75,6 @@ class SuccessView(View):
             reason = request.GET.get('reason')
             order_id = request.GET.get('order_id')
             payment_id = request.GET.get('payment_id')
-
             context = {
                 'obj': e,
                 'code': code,
